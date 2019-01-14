@@ -159,3 +159,19 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
+function add_google_fonts() {
+
+	$query_args = array(
+   		'family' => 'Lobster|Kalam|Palanquin'
+	);
+
+	wp_register_style( 
+		'google-fonts', 
+		add_query_arg( $query_args, '//fonts.googleapis.com/css' ), 
+		array(), 
+		null 
+	);
+
+	wp_enqueue_style( 'google-fonts' );
+}
