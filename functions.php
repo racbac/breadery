@@ -159,19 +159,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
+// Add google fonts
 function add_google_fonts() {
-
-	$query_args = array(
-   		'family' => 'Lobster|Kalam|Palanquin'
-	);
-
-	wp_register_style( 
-		'google-fonts', 
-		add_query_arg( $query_args, '//fonts.googleapis.com/css' ), 
-		array(), 
-		null 
-	);
-
+	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
+	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ), array(), null );
 	wp_enqueue_style( 'google-fonts' );
 }
+add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
+
+// Add normalize.css to head
+function add_css() {
+	wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css');
+}
+add_action('wp_head', 'add_css');
