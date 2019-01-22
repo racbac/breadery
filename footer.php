@@ -14,18 +14,20 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer">
+		<nav class="footer-navigation">
+			<?php
+				wp_nav_menu( array(
+					'theme_location' => 'footer-menu',
+					'menu_id'        => 'footer-menu',
+					'menu_class'     => 'menu nav-menu'
+				) );
+			?>
+		</nav>
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'breadery' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'breadery' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'breadery' ), 'breadery', '<a href="http://www.rachelbackert.com">Rachel Backert</a>' );
-				?>
+			<?php
+			/* translators: 1: CMS, 2: Theme, 3: Theme author. */
+			printf( esc_html__( 'Using %1$s theme %2$s by %3$s.', 'breadery' ), '<a href="'.esc_url(__('https://wordpress.org/', 'breadery')).'">Wordpress</a>', 'breadery', '<a href="https://www.rachelbackert.com">Rachel Backert</a>' );
+			?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

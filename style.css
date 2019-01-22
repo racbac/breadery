@@ -293,6 +293,13 @@ a:hover, a:active {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
+.nav-menu {
+	list-style: none;
+}
+.nav-menu a {
+	text-decoration: none;
+}
+
 .main-navigation {
 	clear: both;
 	float: left;
@@ -304,7 +311,7 @@ a:hover, a:active {
 	align-items: stretch;
 }
 
-.main-navigation ul {
+.main-navigation #primary-menu {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -315,16 +322,18 @@ a:hover, a:active {
 	margin: 0;
 	padding-left: 0;
 
-	transition: max-height 1s cubic-bezier(0, 1.05, 0, 1), background-color 500ms;
-	background-color: #A1750800;
-	list-style: none;
+	-webkit-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+
+	transition: max-height 1s cubic-bezier(0, 1.05, 0, 1);
+	background-color: hsl(40,82.1%,32.9%);
 }
 
 .main-navigation a {
-	text-decoration: none;
 	font-family: 'Lobster', cursive;
 	font-size: 1.5em;
-	color: #36101000;
+	color: hsl(0,53.8%,19.5%);
 	transition: color 500ms;
 
 	/* Sliding underline */
@@ -348,22 +357,12 @@ a:hover, a:active {
 
 .main-navigation a:hover::after, .main-navigation .current-menu-item a::after {
 	width: 100%;
-	background: rgba(54,16,16,1);
+	background: hsl(0,53.8%,19.5%,);
 }
 
-.main-navigation.toggled ul {
+.main-navigation.toggled #primary-menu {
 	max-height: 1000px;
-	background-color: #A17508ff;
-	transition: max-height 3s, background-color 500ms;
-	-webkit-box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-	-moz-box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-	box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-
-}
-
-.main-navigation.toggled a {
-	color: #361010ff;
-	transition: color 1s;
+	transition: max-height 3s;
 }
 
 .main-navigation ul ul {
@@ -401,16 +400,13 @@ a:hover, a:active {
 .menu-toggle {
 	display: block;
 	cursor: pointer;
-
-	color: #361010;
-	
-	background-color: #A17508;
+	color: hsl(0,53.8%,19.5%);
+	background-color: hsl(40,82.1%,32.9%);
 	border: none;
 	border-radius: 0;
-	-webkit-box-shadow:  0px 8px 6px -6px rgba(0,0,0,0.6), inset 0px 8px 6px -6px rgba(0,0,0,0.6);
-	-moz-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6), inset 0px 8px 6px -6px rgba(0,0,0,0.6);
-	box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6), inset 0px 8px 6px -6px rgba(0,0,0,0.6);
-
+	-webkit-box-shadow:  0px 8px 6px -6px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
 	font-family: 'Lobster', cursive;
 	font-size: 1.3rem;
 }
@@ -419,17 +415,9 @@ a:hover, a:active {
 	.menu-toggle {
 		display: none;
 	}
-	.main-navigation ul {
+	.main-navigation #primary-menu {
 		display: flex;
 		max-height: 1000px;
-		background-color: #A17508ff;
-		transition: none;
-		-webkit-box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-		-moz-box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-		box-shadow: inset 0px 8px 6px -6px rgba(0,0,0,0.6), 0px 8px 6px -6px rgba(0,0,0,0.6);
-	}
-	.main-navigation a {
-		color: #361010;
 		transition: none;
 	}
 }
@@ -573,10 +561,10 @@ a:hover, a:active {
 	display: block;
 }
 
-.post,
+/* .post,
 .page {
 	margin: 0 0 1.5em;
-}
+} */
 
 .updated:not(.published) {
 	display: none;
@@ -715,31 +703,87 @@ object {
 	display: block;
 }
 
-/* 
-# Breadery CSS
-*/
-/* 
-## Header 
-*/
+/*--------------------------------------------------------------
+# Breadery
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Header
+--------------------------------------------------------------*/
+
 .site-branding {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	-webkit-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	   -moz-box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	        box-shadow: 0px 8px 6px -6px rgba(0,0,0,0.6);
+	position: relative;
 
-	background-color: #3c5929;
+	background-color: hsl(99.6,53.5%,19.4%);
 }
 
 .header-logo {
 	margin: 1em;
+	max-width: 400px;
 }
 
-/* 
-## Other
-*/
+/*--------------------------------------------------------------
+## Footer
+--------------------------------------------------------------*/
+.site-footer {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: space-evenly;
+	align-items: stretch;
+	
+	padding-top: 2em;
+	background-color: hsl(54.9,67.2%,23.9%);
+	-webkit-box-shadow: 0px -8px 6px -6px rgba(0,0,0,0.6);
+	   -moz-box-shadow: 0px -8px 6px -6px rgba(0,0,0,0.6);
+	        box-shadow: 0px -8px 6px -6px rgba(0,0,0,0.6);
+}
+
+.site-info {
+	font-size: 0.8em;
+	margin: 1em;
+	text-align: center;
+}
+
+#footer-menu {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+
+	margin: 0;
+	padding: 0;
+
+	font-family: 'Palanquin', sans-serif;
+}
+
+#footer-menu a { color: hsl(0,53.8%,19.5%); }
+#footer-menu a:hover { color: hsl(0,53.8%,29.5%); }
+
+#footer-menu li {
+	margin: 1em;
+}
+
+/*--------------------------------------------------------------
+## Body
+--------------------------------------------------------------*/
+
 .site-content {
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: auto;
 	background: white;
+}
+
+.entry-content {
+	padding: 2em 4em;
 }
 
 .entry-title {
