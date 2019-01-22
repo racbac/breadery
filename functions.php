@@ -44,7 +44,8 @@ if ( ! function_exists( 'breadery_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'breadery' ),
+			'primary-menu' => esc_html__( 'Primary', 'breadery' ),
+			'footer-menu' => esc_html__( 'Footer', 'breadery' )
 		) );
 
 		/*
@@ -159,6 +160,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/*--------------------------------------------------------------
+# breadery code
+--------------------------------------------------------------*/
+
+
 // Add google fonts
 function add_google_fonts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
@@ -172,3 +178,48 @@ function add_css() {
 	wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css');
 }
 add_action('wp_head', 'add_css');
+
+/*--------------------------------------------------------------
+## Post editing
+--------------------------------------------------------------*/
+add_action( 'load-post.php', 'page_meta_boxes_setup' );
+add_action( 'load-post-new.php', 'page_meta_boxes_setup' );
+
+function page_meta_boxes_setup() {
+	add_action( 'add_meta_boxes', 'add_custom_meta_box' );
+	add_action( 'save_post', 'save_custom_meta', 10, 2 );
+}
+
+  function add_custom_meta_box() {
+	add_meta_box(
+		'custom_meta',      // Unique ID
+		esc_html__( 'Page Options', 'example' ),    // Title
+		'custom_meta_box',   // Callback function
+		'page',         // Admin page (or post type)
+		'side',         // Context
+		'default'         // Priority
+	  );
+  }
+
+  /* Display the post meta box. */
+function custom_meta_box( $post ) { ?>
+
+	<?php wp_nonce_field( basename( __FILE__ ), 'custom_meta_nonce' ); ?>
+	<input type='checkbox' name='_hide_title' id='_hide_title' value="1" <?= $post->_hide_title == 1 ? 'checked' : ''; ?>>
+	<label for="_hide_title"><?php _e( "Specify whether to hide the page title", 'example' ); ?></label>
+
+  <?php } 
+  
+ function save_custom_meta($post_id, $post) {
+	// Verify nonce, user permissions
+	if ( !isset( $_POST['custom_meta_nonce'] ) || !wp_verify_nonce( $_POST['custom_meta_nonce'], basename( __FILE__ ) ) )
+		return $post_id;
+	$post_type = get_post_type_object( $post->post_type );
+	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
+		return $post_id;
+	
+	// Update value
+	update_post_meta($post_id, '_hide_title', $_POST['_hide_title']);
+ }
+ 
+ ?>
