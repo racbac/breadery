@@ -164,7 +164,6 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 # breadery code
 --------------------------------------------------------------*/
 
-
 // Add google fonts
 function add_google_fonts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
@@ -172,12 +171,6 @@ function add_google_fonts() {
 	wp_enqueue_style( 'google-fonts' );
 }
 add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
-
-// Add normalize.css to head
-function add_css() {
-	wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css');
-}
-add_action('wp_head', 'add_css');
 
 /*--------------------------------------------------------------
 ## Post editing
