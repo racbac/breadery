@@ -20,11 +20,7 @@
 
 		if ( 'post' === get_post_type() ) :
 			?>
-			<div class="entry-meta">
-				<?php
-				breadery_posted_on();
-				breadery_posted_by();
-				?>
+			<div class="entry-meta">Posted by <?php breadery_posted_by(); ?> on <span class='date'><?php breadery_posted_on() ?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
@@ -54,6 +50,7 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
+		<div class='entry-categories'>Posted in <?php breadery_post_category(); breadery_post_tag() ?></div>
 		<?php breadery_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

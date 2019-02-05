@@ -69,7 +69,7 @@ textarea {
 	line-height: 1.5;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	clear: both;
 	font-family: 'Kalam', sans-serif;
 }
@@ -778,6 +778,21 @@ object {
 }
 
 /*--------------------------------------------------------------
+## Headings
+--------------------------------------------------------------*/
+.entry-title a {
+	text-decoration: none;
+	color: inherit;
+}
+.entry-title a:hover {
+	color: inherit;
+}
+
+h1.entry-title {
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
 ## Body
 --------------------------------------------------------------*/
 
@@ -789,8 +804,4 @@ object {
 
 .entry-content {
 	padding: 2em 4em;
-}
-
-.entry-title {
-	text-align: center;
 }
