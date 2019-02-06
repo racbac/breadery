@@ -167,27 +167,30 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 // Add google fonts
 function add_google_fonts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
-	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ), array(), null );
+	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
 	wp_enqueue_style( 'google-fonts' );
 }
 add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
 
 /*--------------------------------------------------------------
-## Post editing
+## Custom Meta Boxes
 --------------------------------------------------------------*/
-add_action( 'load-post.php', 'page_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'page_meta_boxes_setup' );
+/*--------------------------------------------------------------
+### Post Options
+--------------------------------------------------------------*/
+add_action( 'load-post.php', 'page_options_setup' );
+add_action( 'load-post-new.php', 'page_options_setup' );
 
-function page_meta_boxes_setup() {
-	add_action( 'add_meta_boxes', 'add_custom_meta_box' );
-	add_action( 'save_post', 'save_custom_meta', 10, 2 );
+function page_options_setup() {
+	add_action( 'add_meta_boxes', 'add_page_options_box' );
+	add_action( 'save_post', 'save_page_options', 10, 2 );
 }
 
-  function add_custom_meta_box() {
+  function add_page_options_box() {
 	add_meta_box(
-		'custom_meta',      // Unique ID
+		'page_options',      // Unique ID
 		esc_html__( 'Page Options', 'example' ),    // Title
-		'custom_meta_box',   // Callback function
+		'page_options_box',   // Callback function
 		'page',         // Admin page (or post type)
 		'side',         // Context
 		'default'         // Priority
@@ -195,17 +198,17 @@ function page_meta_boxes_setup() {
   }
 
   /* Display the post meta box. */
-function custom_meta_box( $post ) { ?>
+function page_options_box( $post ) { ?>
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'custom_meta_nonce' ); ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'page_options_nonce' ); ?>
 	<input type='checkbox' name='_hide_title' id='_hide_title' value="1" <?= $post->_hide_title == 1 ? 'checked' : ''; ?>>
 	<label for="_hide_title"><?php _e( "Specify whether to hide the page title", 'example' ); ?></label>
 
   <?php } 
   
- function save_custom_meta($post_id, $post) {
+ function save_page_options($post_id, $post) {
 	// Verify nonce, user permissions
-	if ( !isset( $_POST['custom_meta_nonce'] ) || !wp_verify_nonce( $_POST['custom_meta_nonce'], basename( __FILE__ ) ) )
+	if ( !isset( $_POST['page_options_nonce'] ) || !wp_verify_nonce( $_POST['page_options_nonce'], basename( __FILE__ ) ) )
 		return $post_id;
 	$post_type = get_post_type_object( $post->post_type );
 	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
@@ -214,5 +217,57 @@ function custom_meta_box( $post ) { ?>
 	// Update value
 	update_post_meta($post_id, '_hide_title', $_POST['_hide_title']);
  }
+
+ /*--------------------------------------------------------------
+ ### Custom CSS
+ --------------------------------------------------------------*/
+ add_action( 'load-post.php', 'custom_css_setup' );
+ add_action( 'load-post-new.php', 'custom_css_setup' );
+ 
+ function custom_css_setup() {
+	 add_action( 'add_meta_boxes', 'add_custom_css_box' );
+	 add_action( 'save_post', 'save_custom_css', 10, 2 );
+ }
+ 
+   function add_custom_css_box() {
+	 add_meta_box(
+		 'custom_css',      // Unique ID
+		 esc_html__( 'Custom CSS', 'example' ),    // Title
+		 'custom_css_box',   // Callback function
+		 'page',         // Admin page (or post type)
+		 'normal',         // Context
+		 'default'         // Priority
+	   );
+   }
+ 
+   /* Display the post meta box. */
+ function custom_css_box( $post ) { ?>
+ 
+	<?php wp_nonce_field( basename( __FILE__ ), 'custom_css_nonce' ); ?>
+	<label for="_custom_css"><?php _e( "Add custom css for this page", 'example' ); ?></label><br>
+	<textarea name='_custom_css' id='_custom_css' rows='5' cols='75'><?= $post->_custom_css ?></textarea>
+	
+ 
+   <?php } 
+   
+  function save_custom_css($post_id, $post) {
+	 // Verify nonce, user permissions
+	 if ( !isset( $_POST['custom_css_nonce'] ) || !wp_verify_nonce( $_POST['custom_css_nonce'], basename( __FILE__ ) ) )
+		 return $post_id;
+	 $post_type = get_post_type_object( $post->post_type );
+	 if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
+		 return $post_id;
+	 
+	 // Update value
+	 update_post_meta($post_id, '_custom_css', $_POST['_custom_css']);
+  }
+
+  function insert_custom_css() {
+	$custom_css = get_post_meta(get_the_ID(), '_custom_css', true);
+	if ((is_page() || is_single()) && $custom_css)
+		echo "<style type='text/css' id='custom-css'>\n".$custom_css."\n</style>";
+	return;
+  }
+  add_action('wp_head', 'insert_custom_css');
  
  ?>
