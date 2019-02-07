@@ -163,7 +163,9 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 /*--------------------------------------------------------------
 # breadery code
 --------------------------------------------------------------*/
-
+/*--------------------------------------------------------------
+## Simple hooks
+--------------------------------------------------------------*/
 // Add google fonts
 function add_google_fonts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
@@ -171,6 +173,17 @@ function add_google_fonts() {
 	wp_enqueue_style( 'google-fonts' );
 }
 add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
+
+// add polyfill for object-fit
+function add_object_fit() {
+	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js", true);
+}
+add_action('wp_enqueue_scripts', 'add_object_fit');
+
+function call_object_fit() {
+	echo "<script>document.onload = objectFitImages();</script>";
+}
+add_action('wp_footer', 'call_object_fit');
 
 /*--------------------------------------------------------------
 ## Custom Meta Boxes
