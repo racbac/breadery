@@ -40,20 +40,12 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Sass Setup
---------------------------------------------------------------*/
+// Sass setup
 $green: #294C17;
 $lgreen: #294C17;
 $gold: #996B0F;
 $lbrown: #663014;
 $brown: #4C1717;
-
-@mixin box-shadow($shadow...) {
-	-webkit-box-shadow: $shadow;
-	-moz-box-shadow: $shadow;
-	box-shadow: $shadow;
-}
 
 @import './css/normalize';
 /*--------------------------------------------------------------
