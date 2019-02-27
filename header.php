@@ -24,38 +24,39 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'breadery' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<div class="header-logo">
+		<div class="navbar navbar-expand-md navbar-dark">
+			<div class="site-branding navbar-brand">
 				<?php the_custom_logo(); ?>
-			</div>
-			<?php 
-			// display title and description if enabled in customizer
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
+				<?php 
+				if ( is_front_page() && is_home() ) :
+					?>
+					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php
+				else :
+					?>
+					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php
+				endif;
 
-			$breadery_description = get_bloginfo( 'description', 'display' );
-			if ( $breadery_description || is_customize_preview() ) :
+				$breadery_description = get_bloginfo( 'description', 'display' );
+				if ( $breadery_description || is_customize_preview() ) :
+					?>
+					<p class="site-description"><?php echo $breadery_description; /* WPCS: xss ok. */ ?></p>
+				<?php endif; ?>
+			</div><!-- .site-branding -->
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#site-navigation" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class="navbar-toggler-icon"></span>
+        	</button>
+			<nav id="site-navigation" class="main-navigation navbar-collapse collapse">
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'primary-menu',
+					'menu_id'        => 'primary-menu',
+					'menu_class'     => 'navbar-nav nav-menu align-items-center'
+				) );
 				?>
-				<p class="site-description"><?php echo $breadery_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Expand menu</button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'primary-menu',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
+			</nav><!-- #site-navigation -->
+		</div><!-- .navbar -->
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

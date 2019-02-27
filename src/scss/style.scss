@@ -1,0 +1,155 @@
+/*!
+Theme Name: breadery
+Theme URI: http://underscores.me/
+Author: Rachel Backert
+Author URI: http://www.rachelbackert.com
+Description: Redesign of breaderyonline.com
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: breadery
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+breadery is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+$green: #294C17;
+$lgreen: #665F14;
+$gold: #996B0F;
+$lbrown: #663014;
+$brown: #4C1717;
+
+$lobster: 'Lobster', cursive;
+$palanquin: 'Palanquin', sans-serif;
+$kalam: 'Kalam', sans-serif;
+
+
+$logo-width: 250px;
+@import "src/scss/custom-bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "src/scss/normalize";
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.site-header {
+	background: $green;
+}
+
+.custom-logo-link {
+	max-width: $logo-width;
+	height: auto;
+}
+
+@include media-breakpoint-up(md) {
+	.custom-logo {
+		max-height: none;
+	}
+	.custom-logo-link {
+		height: 0;
+	}
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.site-footer {
+	background-color: $green;
+}
+
+#footer-menu {
+	font-family: $palanquin;
+}
+
+.footer-navigation {
+	margin: 2em auto;
+}
+
+.site-info {
+	margin: 1em;
+}
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+.site-info {
+	color: $gray-900;
+}
+
+p {
+	font-family: $palanquin;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: $kalam;
+}
+
+a, a:hover {
+	text-decoration: underline dotted;
+}
+
+/*--------------------------------------------------------------
+## Headings
+--------------------------------------------------------------*/
+.entry-title a {
+	text-decoration: none;
+	color: inherit;
+}
+.entry-title a:hover {
+	color: inherit;
+}
+
+h1.entry-title {
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
+# Menus
+--------------------------------------------------------------*/
+.navbar-nav , .nav {
+	margin: initial;
+	a { text-decoration: none; } 
+}
+
+.main-navigation a {
+	font-family: $lobster;
+	font-size: 1.5em;
+	color: $gold;
+	transition: color 500ms;
+}
+
+// sliding underline
+.main-navigation a {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 2px;
+	height: 100%;
+}
+
+.main-navigation a:after {
+	content:'';
+	display: block;
+	margin: auto;
+	height: 2px;
+	width: 0;
+
+	border-radius: 1rem;
+	background: transparent;
+	transition: width .5s ease, background-color .3s ease;
+}
+
+.main-navigation .current-menu-item a::after {
+	width: 100%;
+	background: $gold;
+}
+.main-navigation a:hover::after {
+	width: 100%;
+	background: $navbar-dark-hover-color;
+} 
+// end sliding underline

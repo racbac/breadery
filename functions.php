@@ -123,15 +123,29 @@ add_action( 'widgets_init', 'breadery_widgets_init' );
 function breadery_scripts() {
 	wp_enqueue_style( 'breadery-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'breadery-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	//wp_enqueue_script( 'breadery-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'breadery-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+	// google fonts
+	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
+	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
+	wp_enqueue_style( 'google-fonts' );
+	// js polyfill for css prop object-fit
+	wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
+	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js", true);
+	wp_enqueue_script('bootstrap-js', get_template_directory_uri().'/js/bootstrap.bundle.min.js');
 }
 add_action( 'wp_enqueue_scripts', 'breadery_scripts' );
+
+// call polyfill for object-fit
+function call_object_fit() {
+	echo "<script>document.onload = objectFitImages();</script>";
+}
+add_action('wp_footer', 'call_object_fit');
 
 /**
  * Implement the Custom Header feature.
@@ -160,36 +174,22 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+// add bootstrap classes
+function breadery_menu_link_class($atts) {
+	$atts['class'] = "nav-link";
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'breadery_menu_link_class');
+function breadery_menu_list_item_class ($classes) {
+	array_push($classes, 'nav-item');
+	return $classes;
+}
+add_filter('nav_menu_css_class', 'breadery_menu_list_item_class');
 /*--------------------------------------------------------------
-# breadery code
+# Custom Meta Boxes
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-## Simple hooks
---------------------------------------------------------------*/
-// Add google fonts
-function add_google_fonts() {
-	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
-	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
-	wp_enqueue_style( 'google-fonts' );
-}
-add_action( 'wp_enqueue_scripts', 'add_google_fonts' );
-
-// add polyfill for object-fit
-function add_object_fit() {
-	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js", true);
-}
-add_action('wp_enqueue_scripts', 'add_object_fit');
-
-function call_object_fit() {
-	echo "<script>document.onload = objectFitImages();</script>";
-}
-add_action('wp_footer', 'call_object_fit');
-
-/*--------------------------------------------------------------
-## Custom Meta Boxes
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-### Post Options
+## Post Options
 --------------------------------------------------------------*/
 add_action( 'load-post.php', 'page_options_setup' );
 add_action( 'load-post-new.php', 'page_options_setup' );
@@ -232,7 +232,7 @@ function page_options_box( $post ) { ?>
  }
 
  /*--------------------------------------------------------------
- ### Custom CSS
+ ## Custom CSS
  --------------------------------------------------------------*/
  add_action( 'load-post.php', 'custom_css_setup' );
  add_action( 'load-post-new.php', 'custom_css_setup' );
