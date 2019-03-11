@@ -30,8 +30,8 @@ $lobster: 'Lobster', cursive;
 $palanquin: 'Palanquin', sans-serif;
 $kalam: 'Kalam', sans-serif;
 
-
 $logo-width: 250px;
+
 @import "src/scss/custom-bootstrap";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "src/scss/normalize";
@@ -41,6 +41,10 @@ $logo-width: 250px;
 --------------------------------------------------------------*/
 .site-header {
 	background: $green;
+}
+
+.site-branding {
+	z-index: 1;
 }
 
 .custom-logo-link {
@@ -117,7 +121,7 @@ h1.entry-title {
 	a { text-decoration: none; } 
 }
 
-.main-navigation a {
+#primary-menu a {
 	font-family: $lobster;
 	font-size: 1.5em;
 	color: $gold;
@@ -125,14 +129,14 @@ h1.entry-title {
 }
 
 // sliding underline
-.main-navigation a {
+#primary-menu a {
 	display: inline-block;
 	position: relative;
 	padding-bottom: 2px;
 	height: 100%;
 }
 
-.main-navigation a:after {
+#primary-menu a:after {
 	content:'';
 	display: block;
 	margin: auto;
@@ -144,12 +148,70 @@ h1.entry-title {
 	transition: width .5s ease, background-color .3s ease;
 }
 
-.main-navigation .current-menu-item a::after {
+#primary-menu .current-menu-item a::after {
 	width: 100%;
 	background: $gold;
 }
-.main-navigation a:hover::after {
+#primary-menu a:hover::after {
 	width: 100%;
 	background: $navbar-dark-hover-color;
 } 
 // end sliding underline
+
+#social-menu li {
+	padding: 0.4rem;
+	a {padding: 0;}
+}
+
+/*--------------------------------------------------------------
+# Body
+--------------------------------------------------------------*/
+.site-main {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+article {
+	background-color: white;
+}
+
+.entry-content {
+	padding: 2rem;
+}
+
+/*--------------------------------------------------------------
+# Images
+--------------------------------------------------------------*/
+.page .post-thumbnail {
+	position: relative;
+	img {
+		width: 100%;
+	}	
+}
+
+.caption {
+	font-family: $lobster;
+	font-size: 0.8rem;
+	color: $gold;
+
+	&.bottom-right {
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
+	}
+	&.bottom-left {
+		position: absolute;
+		bottom: 1rem;
+		left: 1rem;
+	}
+	&.top-right {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
+	&.top-left {
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
+	}
+}

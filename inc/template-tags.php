@@ -143,6 +143,9 @@ if ( ! function_exists( 'breadery_post_thumbnail' ) ) :
 
 			<div class="post-thumbnail">
 				<?php the_post_thumbnail(); ?>
+				<?php if(get_the_post_thumbnail_caption() != "") : ?>
+				<span class="caption bottom-right"><?php the_post_thumbnail_caption(); ?></span>
+				<?php endif; ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
