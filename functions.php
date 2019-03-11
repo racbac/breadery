@@ -45,7 +45,8 @@ if ( ! function_exists( 'breadery_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'primary-menu' => esc_html__( 'Primary', 'breadery' ),
-			'footer-menu' => esc_html__( 'Footer', 'breadery' )
+			'footer-menu' => esc_html__( 'Footer', 'breadery' ),
+			'social-menu' => esc_html__('Social', 'breadery')
 		) );
 
 		/*
@@ -122,9 +123,6 @@ add_action( 'widgets_init', 'breadery_widgets_init' );
  */
 function breadery_scripts() {
 	wp_enqueue_style( 'breadery-style', get_stylesheet_uri() );
-
-	//wp_enqueue_script( 'breadery-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-
 	wp_enqueue_script( 'breadery-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -134,7 +132,7 @@ function breadery_scripts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
 	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
 	wp_enqueue_style( 'google-fonts' );
-	// js polyfill for css prop object-fit
+	// javascript
 	wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
 	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js", true);
 	wp_enqueue_script('bootstrap-js', get_template_directory_uri().'/js/bootstrap.bundle.min.js');
@@ -215,7 +213,7 @@ function page_options_box( $post ) { ?>
 
 	<?php wp_nonce_field( basename( __FILE__ ), 'page_options_nonce' ); ?>
 	<input type='checkbox' name='_hide_title' id='_hide_title' value="1" <?= $post->_hide_title == 1 ? 'checked' : ''; ?>>
-	<label for="_hide_title"><?php _e( "Specify whether to hide the page title", 'example' ); ?></label>
+	<label for="_hide_title"><?php _e( "Hide page title", 'breadery' ); ?></label>
 
   <?php } 
   
@@ -257,7 +255,7 @@ function page_options_box( $post ) { ?>
  function custom_css_box( $post ) { ?>
  
 	<?php wp_nonce_field( basename( __FILE__ ), 'custom_css_nonce' ); ?>
-	<label for="_custom_css"><?php _e( "Add custom css for this page", 'example' ); ?></label><br>
+	<label for="_custom_css"><?php _e( "Add custom css for this page", 'breadery' ); ?></label><br>
 	<textarea name='_custom_css' id='_custom_css' rows='5' cols='75'><?= $post->_custom_css ?></textarea>
 	
  
@@ -283,4 +281,6 @@ function page_options_box( $post ) { ?>
   }
   add_action('wp_head', 'insert_custom_css');
  
+  require get_template_directory() . '/inc/icon-functions.php';
+  require get_template_directory() . '/inc/class-twentynineteen-svg-icons.php';
  ?>

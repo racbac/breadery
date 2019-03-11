@@ -24,7 +24,7 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'breadery' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="navbar navbar-expand-md navbar-dark">
+		<div class="navbar navbar-expand-md navbar-dark justify-content-between">
 			<div class="site-branding navbar-brand">
 				<?php the_custom_logo(); ?>
 				<?php 
@@ -47,7 +47,7 @@
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#site-navigation" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="navbar-toggler-icon"></span>
         	</button>
-			<nav id="site-navigation" class="main-navigation navbar-collapse collapse">
+			<nav id="site-navigation" class="main-navigation navbar-collapse collapse justify-content-between">
 				<?php
 				wp_nav_menu( array(
 					'theme_location' => 'primary-menu',
@@ -55,6 +55,15 @@
 					'menu_class'     => 'navbar-nav nav-menu align-items-center'
 				) );
 				?>
+				<?php 
+				wp_nav_menu( array(
+					'theme_location' => 'social-menu',
+					'menu_id'        => 'social-menu',
+					'menu_class'     => 'nav justify-content-center',
+					'link_before'    => '<span class="screen-reader-text">',
+					'link_after'     => '</span>' . twentynineteen_get_icon_svg( 'link', 16 )
+				) );
+			?>
 			</nav><!-- #site-navigation -->
 		</div><!-- .navbar -->
 	</header><!-- #masthead -->
