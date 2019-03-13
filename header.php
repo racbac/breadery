@@ -61,7 +61,7 @@
 					'menu_id'        => 'social-menu',
 					'menu_class'     => 'nav justify-content-center',
 					'link_before'    => '<span class="screen-reader-text">',
-					'link_after'     => '</span>' . twentynineteen_get_icon_svg( 'link', 16 )
+					'link_after'     => '</span>'
 				) );
 			?>
 			</nav><!-- #site-navigation -->
