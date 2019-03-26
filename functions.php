@@ -122,6 +122,7 @@ add_action( 'widgets_init', 'breadery_widgets_init' );
  * Enqueue scripts and styles.
  */
 function breadery_scripts() {
+	wp_enqueue_style('breadery-layout', get_template_directory_uri()."/layout.css");
 	wp_enqueue_style( 'breadery-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'breadery-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -132,12 +133,14 @@ function breadery_scripts() {
 	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
 	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
 	wp_enqueue_style( 'google-fonts' );
+
 	// font awesome
 	wp_enqueue_style('font-awesome', '//use.fontawesome.com/releases/v5.7.2/css/all.css');
+
 	// javascript
-	wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
-	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js", true);
-	wp_enqueue_script('bootstrap-js', get_template_directory_uri().'/js/bootstrap.bundle.min.js');
+	wp_enqueue_script('bootstrap-js', get_template_directory_uri().'/js/bootstrap.bundle.min.js',array('jquery'));
+	wp_enqueue_script('object-fit', get_template_directory_uri()."/js/ofi.min.js",array(),false, true);
+	wp_enqueue_script('navigation-js', get_template_directory_uri()."/js/navigation.js",array('jquery'),null,true);
 }
 add_action( 'wp_enqueue_scripts', 'breadery_scripts' );
 
@@ -151,10 +154,10 @@ function font_awesome_attributes($html, $handle) {
 add_filter('style_loader_tag', 'font_awesome_attributes', 10, 2);
 
 // call polyfill for object-fit
-function call_object_fit() {
+/* function call_object_fit() {
 	echo "<script>document.onload = objectFitImages();</script>";
 }
-add_action('wp_footer', 'call_object_fit');
+add_action('wp_footer', 'call_object_fit'); */
 
 /**
  * Implement the Custom Header feature.
@@ -201,13 +204,15 @@ add_filter('nav_menu_css_class', 'breadery_menu_list_item_class');
  * Use Font Awesome webfont for social links
  */
 function breadery_nav_menu_social_icons($item_output, $item, $depth, $args) {
-	// Change SVG icon inside social links menu if there is supported URL.
 	if ( 'social-menu' === $args->theme_location ) {
+		// Change SVG icon inside social links menu.
 		$svg = Breadery_FA_Icons::get_social_link_fa( $item->url);
 		if ( empty( $svg ) ) {
 			$svg = Breadery_FA_Icons::get_icon_fa('ui', 'link' );
 		}
-		$item_output = str_replace( $args->link_after, '</span>' . $svg, $item_output );
+		// Add class to color icon on hover
+		$svg = str_replace("class='","class='brand-color fg-hover ",$svg);
+		$item_output = str_replace( $args->link_after, $args->link_after . $svg, $item_output );
 	}
 
 	return $item_output;

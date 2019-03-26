@@ -11,7 +11,9 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }
 ?>
-
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
+<div class="sidebar sidebar-expand-lg">
+	<button class="sidebar-toggler collapsed" data-toggle="side-collapse" data-target="#secondary"></button>
+	<aside id="secondary" class="widget-area collapse sidebar-collapse">
+		<div><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+	</aside><!-- #secondary -->
+</div>

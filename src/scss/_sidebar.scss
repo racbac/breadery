@@ -1,0 +1,45 @@
+/*--------------------------------------------------------------
+# Collapsing Sidebar
+--------------------------------------------------------------*/
+.sidebar-toggler {
+	position: absolute;
+
+	&:not(.collapsed)::before {
+		content: '\00d7';
+	}
+
+	&.collapsed::before {
+		content: '\002b';
+	}
+}	
+
+.sidebar-expand-lg {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	z-index: 1;
+}
+
+.sidebar-collapse {
+	align-self: stretch;
+}
+
+@include media-breakpoint-up(lg) {
+	.sidebar-expand-lg {
+		position: initial;
+		height: auto;
+		top: initial;
+		right: initial;
+
+		.sidebar-collapse {
+			display: block !important;
+		}
+		.sidebar-toggler {
+			display: none;
+		}
+	}
+}

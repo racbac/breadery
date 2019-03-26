@@ -1,0 +1,114 @@
+/*
+ * Social Network coloring
+ * Provides variables containing social network's brand colors.
+ * Generates CSS rules to apply brand colors according to their classes.
+ */
+
+/*
+ * Social network color variables
+ */
+$facebook: #3b5998;
+$twitter: #1da1f2;
+$youtube: #ff0000;
+$instagram-pink: #c32aa3;
+$instagram-blue: #4c5fd7;
+$instagram-purple: #7232bd;
+$instagram-orange: #f46f30;
+$instagram-yellow: #ffdc7d;
+$instagram: $instagram-pink;
+$google-blue: #4285f4;
+$google-red: #ea4335; 
+$google-yellow: #fbbc05; 
+$google-green: #34a853;
+$google: $google-red;
+$pinterest: #bd081c;
+$googleplus: #db4437;
+$linkedin: #007bb5;
+$vimeo: #1ab7ea;
+$tumblr: #2c4762;
+$snapchat: #fffc00;
+$whatsapp-green: #25d366;
+$whatsapp-teal1: #075e54;
+$whatsapp-teal2: #128c7e;
+$whatsapp: $whatsapp-green;
+$mastodon: #2b90d9;
+$apple: #a6b1b7;
+$amazon: #ff9900;
+$microsoft-blue: #03a5f0;
+$microsoft-red: #f35022;
+$microsoft-green: #80bb03;
+$microsoft-yellow: #ffb903;
+$microsoft: $microsoft-blue;
+$periscope: #40a4c4;
+$foursquare-pink: #f94877; 
+$foursquare-blue: #0732A2;
+$foursquare: $foursquare-pink;
+$swarm: #ffa633;
+$medium: #02b875;
+$skype: #00aff0;
+$android: #a4c639;
+$stumbleupon: #e94826;
+$flickr-pink: #f40083;
+$flickr-blue: #006add;
+$flickr: $flickr-blue;
+$yahoo: #430297;
+$twitch: #6441a4;
+$soundcloud: #ff5500;
+$spotify: #20B954;
+$dribbble: #ea4c89;
+$slack-purple: #4a154b; 
+$slack-blue: #36c5f0; 
+$slack-green: #2eb67d; 
+$slack-red: #e01e5a; 
+$slack-yellow: #ecb22e;
+$slack: $slack-purple;
+$reddit: #ff5700;
+$deviantart: #05cc47;
+$pocket: #ee4056;
+$quora: #aa2200;
+$slideshare-orange: #e68523;
+$slideshare-blue: #00a0dc;
+$slideshare: $slideshare-orange;
+$fivehundredpx: #0099e5;
+$vk: #4a76a8;
+$listly: #df6d46;
+$vine: #00b489;
+$steam: #171a21;
+$discord: #7289da;
+$telegram: #0088cc;
+$clarity: #61bed9;
+
+/* 
+ * Rule generator
+ * Generates CSS rules that applies brand color to a CSS property based on element's classes.
+ * .brand-color             | always required
+ * .bg and .fg              | apply brand color to 'color' and 'background-color' properties, respectively
+ * .bg-hover and .fg-hover  | apply the brand color to prefix's property when element is hovered
+ */
+$networks: ('facebook', 'twitter', 'youtube', 'instagram', 'google', 'pinterest', 'googleplus', 'linkedin', 'vimeo', 'tumblr', 'snapchat', 'whatsapp', 'mastodon', 'apple', 'amazon', 'microsoft', 'periscope', 'foursquare', 'swarm', 'medium', 'skype', 'android', 'stumbleupon', 'flickr', 'yahoo', 'twitch', 'soundcloud', 'spotify', 'dribbble', 'slack', 'reddit', 'deviantart', 'pocket', 'quora', 'slideshare', 'fivehundredpx', 'vk', 'listly', 'vine', 'steam', 'discord', 'telegram', 'clarity');
+$colors: ($facebook, $twitter, $youtube, $instagram, $google, $pinterest, $googleplus, $linkedin, $vimeo, $tumblr, $snapchat, $whatsapp, $mastodon, $apple, $amazon, $microsoft, $periscope, $foursquare, $swarm, $medium, $skype, $android, $stumbleupon, $flickr, $yahoo, $twitch, $soundcloud, $spotify, $dribbble, $slack, $reddit, $deviantart, $pocket, $quora, $slideshare, $fivehundredpx, $vk, $listly, $vine, $steam, $discord, $telegram, $clarity);
+
+@mixin assign-brand-colors($property) {
+    $i: 1;
+    @each $network in $networks {
+        &[class*=#{$network}] {
+            #{$property}: nth($colors, $i);
+        }
+        $i: $i + 1;
+    }
+}
+
+.brand-color {
+    &.bg-hover:hover{
+        @include assign-brand-colors(background-color);
+    }
+    &.bg {
+        @include assign-brand-colors(background-color);
+    }
+    &.fg {
+        @include assign-brand-colors(color);
+    }
+    &.fg-hover:hover {
+        @include assign-brand-colors(color);
+    }
+}
