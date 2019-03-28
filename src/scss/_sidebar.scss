@@ -3,6 +3,7 @@
 --------------------------------------------------------------*/
 .sidebar-toggler {
 	position: absolute;
+	background: rgba(0,0,0,0.15);
 
 	&:not(.collapsed)::before {
 		content: '\00d7';
@@ -21,7 +22,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	z-index: 1;
+	z-index: 3;
 }
 
 .sidebar-collapse {
