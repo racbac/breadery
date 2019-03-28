@@ -130,7 +130,7 @@ function breadery_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	// google fonts
-	$query_args = array( 'family' => 'Lobster|Kalam|Palanquin' );
+	$query_args = array( 'family' => 'Lobster|EB+Garamond|Lato' );
 	wp_register_style( 'google-fonts', add_query_arg( $query_args, '//fonts.googleapis.com/css' ));
 	wp_enqueue_style( 'google-fonts' );
 
