@@ -4,6 +4,7 @@
         $("button[data-toggle='side-collapse']").click(function(){
             $($(this).attr("data-target")).toggleClass("show");
             $(this).toggleClass("collapsed");
+            $("#site-overlay").toggleClass("show");
         });
     });
 })(jQuery);

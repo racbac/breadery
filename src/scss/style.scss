@@ -21,10 +21,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
 
-$lobster: 'Lobster', cursive;
-$palanquin: 'Palanquin', sans-serif;
-$kalam: 'Kalam', sans-serif;
+$font-primary: 'Lobster', serif;
+$font-secondary: 'EB Garamond', 'Georgia', serif;
+$font-tertiary: 'Lato', serif;
 $logo-width: 250px;
+$reading-width: 40em;
 
 @import "src/scss/breadery-colors";
 @import "node_modules/bootstrap/scss/_functions";
@@ -41,6 +42,9 @@ $logo-width: 250px;
 
 .site-branding {
 	z-index: 1;
+	order: -1;
+	align-self: flex-end;
+	filter: drop-shadow(0 5px 5px rgba(0,0,0,0.9));
 }
 
 .custom-logo-link {
@@ -49,11 +53,8 @@ $logo-width: 250px;
 }
 
 @include media-breakpoint-up(md) {
-	.custom-logo {
-		max-height: none;
-	}
-	.custom-logo-link {
-		height: 0;
+	.site-branding {
+		margin-bottom: -25px;
 	}
 }
 
@@ -65,7 +66,7 @@ $logo-width: 250px;
 }
 
 #footer-menu {
-	font-family: $palanquin;
+	font-family: $font-tertiary;
 }
 
 .footer-navigation {
@@ -82,17 +83,22 @@ $logo-width: 250px;
 	color: $gray-900;
 }
 
-p {
-	font-family: $palanquin;
+body {
+	font-family: $font-tertiary;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	font-family: $kalam;
+	font-family: $font-secondary;
+	font-weight: 700;
 }
 
 a, a:hover {
 	text-decoration: underline dotted;
 }
+
+.font-primary { font-family: $font-primary; }
+.font-secondary { font-family: $font-secondary; }
+.font-tertiary { font-family: $font-tertiary; }
 
 /*--------------------------------------------------------------
 ## Headings
@@ -117,11 +123,18 @@ h1.entry-title {
 	a { text-decoration: none; } 
 }
 
-#primary-menu a {
-	font-family: $lobster;
-	font-size: 1.5em;
-	color: $gold;
-	transition: color 500ms;
+#primary-menu {
+	flex-wrap: wrap;
+	a {
+		font-family: $font-primary;
+		font-size: 1.5em;
+		color: $gold;
+		transition: color 500ms;
+	}
+}
+
+.main-navigation li {
+	margin: 0.5em;
 }
 
 // sliding underline
@@ -146,11 +159,11 @@ h1.entry-title {
 
 #primary-menu .current-menu-item a::after {
 	width: 100%;
-	background: $gold;
+	background-color: $gold;
 }
 #primary-menu a:hover::after {
 	width: 100%;
-	background: $navbar-dark-hover-color;
+	background-color: $gold;
 } 
 // end sliding underline
 
@@ -188,6 +201,10 @@ html, body {
 }
 // end sticky footer
 
+body {
+	background-color: #a87848;
+}
+
 .site-content {
 	display: flex;
 	flex-direction: column;
@@ -196,26 +213,74 @@ html, body {
 }
 
 .content-area {
-	max-width: 980px;
 	background-color: white;
+	flex: 0 1 900px;
 }
 
-.entry-content {
-	padding: 2rem;
+#site-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 2;
+}
+
+/*--------------------------------------------------------------
+# Posts
+--------------------------------------------------------------*/
+
+article {
+	+ hr {
+		width: 80%;
+	}
+	&:last-of-type + hr {
+		display: none;
+	}
+}
+.entry-header {
+	text-align: center;
+}
+
+.entry-header, .entry-content, .entry-footer {
+	margin: 1.5rem 3rem;
+}
+
+.entry-meta > span {
+	margin-right: 1em;
+
+	i { margin-right: 0.5em; }
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+}
+
+.post-thumbnail {
+	position: relative;
+	text-align: center;
+	margin: auto;
+	display: table;
+	> * {
+		display: table-row;
+	}
 }
 
 /*--------------------------------------------------------------
 # Images
 --------------------------------------------------------------*/
-.page .post-thumbnail {
-	position: relative;
+.full-width {
+	width: 100%;
 	img {
 		width: 100%;
 	}	
 }
 
 .caption {
-	font-family: $lobster;
+	font-family: $font-primary;
 	font-size: 0.8rem;
 	color: $gold;
 
@@ -246,7 +311,8 @@ html, body {
 --------------------------------------------------------------*/
 .widget-area {
 	display: block;
-	background: white;
+	background-color: white;
+	overflow-y: auto;
 	> div {
 		padding: 1rem;
 	}
@@ -272,6 +338,17 @@ html, body {
 		right: initial;
 	}
 }
+
+@include media-breakpoint-up(md) {
+	.site-branding {
+		order: 0;
+	}
+	
+	#site-navigation, #social-navigation {
+		width: calc(50% - #{$logo-width} / 2);
+	}
+}
+
 @include media-breakpoint-up(lg) {
 	.site-content {
 		flex-direction: row;

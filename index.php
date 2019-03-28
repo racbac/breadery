@@ -21,10 +21,10 @@ get_header();
 		<?php
 		if ( have_posts() ) :
 
-			if ( is_home() && ! is_front_page() ) : // blog index isn't the front page
+			if ( is_home() && ! is_front_page() ) : // blogroll isn't the site's front page
 				?>
-				<header>
-					<h1 class='entry-title'><?php single_post_title(); ?></h1>
+				<header class="entry-header">
+					<h1 class="entry-title"><?php single_post_title(); ?></h1>
 				</header>
 				<?php
 			endif;

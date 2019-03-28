@@ -144,21 +144,25 @@ if ( ! function_exists( 'breadery_post_thumbnail' ) ) :
 			<div class="post-thumbnail">
 				<?php the_post_thumbnail(); ?>
 				<?php if(get_the_post_thumbnail_caption() != "") : ?>
-				<span class="caption bottom-right"><?php the_post_thumbnail_caption(); ?></span>
+				<span class="img-caption"><?php the_post_thumbnail_caption(); ?></span>
 				<?php endif; ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
-
-		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-			<?php
-			the_post_thumbnail( 'post-thumbnail', array(
-				'alt' => the_title_attribute( array(
-					'echo' => false,
-				) ),
-			) );
-			?>
-		</a>
+		<div class="post-thumbnail">
+			<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+				<?php
+				the_post_thumbnail( 'post-thumbnail', array(
+					'alt' => the_title_attribute( array(
+						'echo' => false,
+					) ),
+				) );
+				?>
+			</a>
+			<?php if(get_the_post_thumbnail_caption() != "") : ?>
+			<span class="img-caption"><?php the_post_thumbnail_caption(); ?></span>
+			<?php endif; ?>
+		</div>
 
 		<?php
 		endif; // End is_singular().
