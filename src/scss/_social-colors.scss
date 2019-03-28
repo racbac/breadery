@@ -77,6 +77,7 @@ $steam: #171a21;
 $discord: #7289da;
 $telegram: #0088cc;
 $clarity: #61bed9;
+$rss: #FA9C39;
 
 /* 
  * Rule generator
@@ -85,8 +86,8 @@ $clarity: #61bed9;
  * .bg and .fg              | apply brand color to 'color' and 'background-color' properties, respectively
  * .bg-hover and .fg-hover  | apply the brand color to prefix's property when element is hovered
  */
-$networks: ('facebook', 'twitter', 'youtube', 'instagram', 'google', 'pinterest', 'googleplus', 'linkedin', 'vimeo', 'tumblr', 'snapchat', 'whatsapp', 'mastodon', 'apple', 'amazon', 'microsoft', 'periscope', 'foursquare', 'swarm', 'medium', 'skype', 'android', 'stumbleupon', 'flickr', 'yahoo', 'twitch', 'soundcloud', 'spotify', 'dribbble', 'slack', 'reddit', 'deviantart', 'pocket', 'quora', 'slideshare', 'fivehundredpx', 'vk', 'listly', 'vine', 'steam', 'discord', 'telegram', 'clarity');
-$colors: ($facebook, $twitter, $youtube, $instagram, $google, $pinterest, $googleplus, $linkedin, $vimeo, $tumblr, $snapchat, $whatsapp, $mastodon, $apple, $amazon, $microsoft, $periscope, $foursquare, $swarm, $medium, $skype, $android, $stumbleupon, $flickr, $yahoo, $twitch, $soundcloud, $spotify, $dribbble, $slack, $reddit, $deviantart, $pocket, $quora, $slideshare, $fivehundredpx, $vk, $listly, $vine, $steam, $discord, $telegram, $clarity);
+$networks: ('facebook', 'twitter', 'youtube', 'instagram', 'google', 'pinterest', 'googleplus', 'linkedin', 'vimeo', 'tumblr', 'snapchat', 'whatsapp', 'mastodon', 'apple', 'amazon', 'microsoft', 'periscope', 'foursquare', 'swarm', 'medium', 'skype', 'android', 'stumbleupon', 'flickr', 'yahoo', 'twitch', 'soundcloud', 'spotify', 'dribbble', 'slack', 'reddit', 'deviantart', 'pocket', 'quora', 'slideshare', 'fivehundredpx', 'vk', 'listly', 'vine', 'steam', 'discord', 'telegram', 'clarity', 'rss');
+$colors: ($facebook, $twitter, $youtube, $instagram, $google, $pinterest, $googleplus, $linkedin, $vimeo, $tumblr, $snapchat, $whatsapp, $mastodon, $apple, $amazon, $microsoft, $periscope, $foursquare, $swarm, $medium, $skype, $android, $stumbleupon, $flickr, $yahoo, $twitch, $soundcloud, $spotify, $dribbble, $slack, $reddit, $deviantart, $pocket, $quora, $slideshare, $fivehundredpx, $vk, $listly, $vine, $steam, $discord, $telegram, $clarity, $rss);
 
 @mixin assign-brand-colors($property) {
     $i: 1;
