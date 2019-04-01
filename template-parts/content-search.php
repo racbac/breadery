@@ -16,8 +16,8 @@
 		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php
-			breadery_posted_on();
-			breadery_posted_by();
+			breadery_posted_on(true);
+			breadery_posted_by(true);
 			?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
