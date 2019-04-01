@@ -92,8 +92,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-weight: 700;
 }
 
-a, a:hover {
-	text-decoration: underline dotted;
+a {
+	text-decoration: none;
+	color: $gold;
+
+	&:hover {
+		text-decoration: underline dotted;
+		color: tint($gold, 30);
+	}
 }
 
 .font-primary { font-family: $font-primary; }
@@ -106,13 +112,11 @@ a, a:hover {
 .entry-title a {
 	text-decoration: none;
 	color: inherit;
-}
-.entry-title a:hover {
-	color: inherit;
-}
-
-h1.entry-title {
-	text-align: center;
+	
+	&:hover {
+		color: inherit;
+		text-decoration: underline dotted;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -241,11 +245,11 @@ article {
 		display: none;
 	}
 }
-.entry-header {
+.entry-header, .page-header {
 	text-align: center;
 }
 
-.entry-header, .entry-content, .entry-footer {
+.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary {
 	margin: 1.5rem 3rem;
 }
 
