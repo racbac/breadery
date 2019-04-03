@@ -15,20 +15,16 @@ get_header();
 
 			<section class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'breadery' ); ?></h1>
+					<h1 class="page-title"><?php esc_html_e( 'Oops! That page wasn&rsquo;t found.', 'breadery' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'breadery' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
+					<p><?php esc_html_e( 'Maybe try one of the links below or a search?', 'breadery' ); ?></p>
+					<div class="widget widget_search"><?php get_search_form() ?></div>
+					<?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
 
 					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'breadery' ); ?></h2>
+						<h2 class="widget-title"><?php esc_html_e( 'Popular Categories', 'breadery' ); ?></h2>
 						<ul>
 							<?php
 							wp_list_categories( array(
@@ -44,10 +40,8 @@ get_header();
 
 					<?php
 					/* translators: %1$s: smiley */
-					$breadery_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'breadery' ), convert_smilies( ':)' ) ) . '</p>';
+					$breadery_archive_content = '<p>' . esc_html__( 'Try browsing the monthly archives.', 'breadery' ) . '</p>';
 					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$breadery_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
 					?>
 
 				</div><!-- .page-content -->
