@@ -7,6 +7,16 @@
  * @package breadery
  */
 
+if ( ! function_exists('breadery_post_navigation')) :
+	function breadery_post_navigation() {
+		$markup = '<span class="meta-nav">%s</span><br><span class="post-title">%%title</span>';
+		the_post_navigation(array(
+			'next_text' => sprintf($markup, 'Next post' . Breadery_FA_Icons::get_icon_fa('solid', 'long-arrow-alt-right')),
+			'prev_text' => sprintf($markup, Breadery_FA_Icons::get_icon_fa('solid', 'long-arrow-alt-left') . 'Previous post')
+		));
+	}
+endif;
+
 if ( ! function_exists( 'breadery_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
@@ -86,30 +96,38 @@ if (! function_exists( 'breadery_post_tag' ) ) :
 
 endif;
 
+if (! function_exists( 'breadery_post_comments' ) ) :
+	/** 
+	 * Prints HTML with meta for comments
+	 */
+	function breadery_post_comments() {
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<span class="comments-link">';
+			comments_popup_link(
+				sprintf(
+					wp_kses(
+						/* translators: %s: post title */
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'breadery' ),
+						array(
+							'span' => array(
+								'class' => array(),
+							),
+						)
+					),
+					get_the_title()
+				)
+			);
+			echo '</span>';
+		}
+	}
+
+endif;
+
 if ( ! function_exists( 'breadery_entry_footer' ) ) :
 	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
+	 * Prints edit link for admins
 	 */
 	function breadery_entry_footer() {
-		// if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		// 	echo '<span class="comments-link">';
-		// 	comments_popup_link(
-		// 		sprintf(
-		// 			wp_kses(
-		// 				/* translators: %s: post title */
-		// 				__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'breadery' ),
-		// 				array(
-		// 					'span' => array(
-		// 						'class' => array(),
-		// 					),
-		// 				)
-		// 			),
-		// 			get_the_title()
-		// 		)
-		// 	);
-		// 	echo '</span>';
-		// }
-
 		edit_post_link(
 			sprintf(
 				wp_kses(
