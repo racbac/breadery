@@ -27,17 +27,18 @@ $font-tertiary: 'Lato', serif;
 $logo-width: 250px;
 $reading-width: 40em;
 
+@import "src/scss/normalize-slim";
 @import "src/scss/breadery-colors";
-@import "node_modules/bootstrap/scss/_functions";
-@import "node_modules/bootstrap/scss/_variables";
-@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+@import "src/scss/bootstrap-custom";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "src/scss/sidebar";
 @import "src/scss/social-colors";
 
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 .site-header {
-	background: $green;
+	background: $color-primary;
 }
 
 .site-branding {
@@ -62,7 +63,7 @@ $reading-width: 40em;
 # Footer
 --------------------------------------------------------------*/
 .site-footer {
-	background-color: $green;
+	background-color: $color-primary;
 }
 
 #footer-menu {
@@ -94,30 +95,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 a {
 	text-decoration: none;
-	color: $gold;
+	color: $color-secondary;
 
 	&:hover {
 		text-decoration: underline dotted;
-		color: tint($gold, 30);
+		color: tint($color-secondary, 30);
 	}
 }
 
 .font-primary { font-family: $font-primary; }
 .font-secondary { font-family: $font-secondary; }
 .font-tertiary { font-family: $font-tertiary; }
-
-/*--------------------------------------------------------------
-## Headings
---------------------------------------------------------------*/
-.entry-title a {
-	text-decoration: none;
-	color: inherit;
-	
-	&:hover {
-		color: inherit;
-		text-decoration: underline dotted;
-	}
-}
 
 /*--------------------------------------------------------------
 # Menus
@@ -132,7 +120,7 @@ a {
 	a {
 		font-family: $font-primary;
 		font-size: 1.5em;
-		color: $gold;
+		color: $color-secondary;
 		transition: color 500ms;
 	}
 }
@@ -163,11 +151,11 @@ a {
 
 #primary-menu .current-menu-item a::after {
 	width: 100%;
-	background-color: $gold;
+	background-color: $color-secondary;
 }
 #primary-menu a:hover::after {
 	width: 100%;
-	background-color: $gold;
+	background-color: $color-secondary;
 } 
 // end sliding underline
 
@@ -233,9 +221,22 @@ body {
 	z-index: 2;
 }
 
+ul {
+	padding-left: 1.5em;
+}
+
 /*--------------------------------------------------------------
 # Posts
 --------------------------------------------------------------*/
+.entry-title a {
+	text-decoration: none;
+	color: inherit;
+	
+	&:hover {
+		color: inherit;
+		text-decoration: underline dotted;
+	}
+}
 
 article {
 	+ hr {
@@ -249,14 +250,17 @@ article {
 	text-align: center;
 }
 
-.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary {
+.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content {
 	margin: 1.5rem 3rem;
 }
 
 .entry-meta > span {
 	margin-right: 1em;
 
-	i { margin-right: 0.5em; }
+	i { 
+		margin-right: 0.5em;
+		color: $color-tertiary;;
+	 }
 
 	&:last-of-type {
 		margin-right: 0;
@@ -273,6 +277,37 @@ article {
 	}
 }
 
+.post-navigation .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	.meta-nav {
+		color: $body;
+		text-decoration: underline dotted white;
+	}
+
+	.nav-previous a, .nav-next a {
+		display: inline-block;
+	}
+	.nav-previous {
+		text-align: right;
+		margin-right: 2em;
+
+		i { margin-right: 0.5em; }
+	}
+
+	.nav-next i { margin-left: 0.5em; }
+}
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+	@extend .btn;
+	@extend .btn-primary;
+}
+
 /*--------------------------------------------------------------
 # Images
 --------------------------------------------------------------*/
@@ -286,7 +321,7 @@ article {
 .caption {
 	font-family: $font-primary;
 	font-size: 0.8rem;
-	color: $gold;
+	color: $color-secondary;
 
 	&.bottom-right {
 		position: absolute;
@@ -311,7 +346,7 @@ article {
 }
 
 /*--------------------------------------------------------------
-# Sidebar
+# Widgets
 --------------------------------------------------------------*/
 .widget-area {
 	display: block;
@@ -322,6 +357,20 @@ article {
 	}
 }
 
+.widget {
+	margin-bottom: 1rem;
+}
+
+.search-form {
+	.input-group > .form-control.search-field {
+		flex: 0 1 10em;
+	}
+}
+
+select[name="archive-dropdown"] {
+	@extend .form-control;
+	width: auto;
+}
 /*--------------------------------------------------------------
 # Breakpoints
 --------------------------------------------------------------*/
