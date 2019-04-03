@@ -122,7 +122,7 @@ add_action( 'widgets_init', 'breadery_widgets_init' );
  * Enqueue scripts and styles.
  */
 function breadery_scripts() {
-	wp_enqueue_style('breadery-layout', get_template_directory_uri()."/layout.css");
+	//wp_enqueue_style('breadery-layout', get_template_directory_uri()."/layout.css");
 	wp_enqueue_style( 'breadery-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'breadery-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -143,21 +143,6 @@ function breadery_scripts() {
 	wp_enqueue_script('navigation-js', get_template_directory_uri()."/js/navigation.js",array('jquery'),null,true);
 }
 add_action( 'wp_enqueue_scripts', 'breadery_scripts' );
-
-// add font-awesome stylesheet attributes
-function font_awesome_attributes($html, $handle) {
-	if ($handle == "font-awesome") {
-		$html = str_replace("media='all'","media='all' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'",$html);
-	}
-	return $html;
-}
-add_filter('style_loader_tag', 'font_awesome_attributes', 10, 2);
-
-// call polyfill for object-fit
-/* function call_object_fit() {
-	echo "<script>document.onload = objectFitImages();</script>";
-}
-add_action('wp_footer', 'call_object_fit'); */
 
 /**
  * Implement the Custom Header feature.
@@ -186,6 +171,19 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/*--------------------------------------------------------------
+# Filters
+--------------------------------------------------------------*/
+/**
+ * Font Awesome stylesheet attributes
+ */
+function font_awesome_attributes($html, $handle) {
+	if ($handle == "font-awesome") {
+		$html = str_replace("media='all'","media='all' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'",$html);
+	}
+	return $html;
+}
+add_filter('style_loader_tag', 'font_awesome_attributes', 10, 2);
 /**
  * Add bootstrap classes to navs
  */
@@ -218,6 +216,17 @@ function breadery_nav_menu_social_icons($item_output, $item, $depth, $args) {
 	return $item_output;
 }
 add_filter( 'walker_nav_menu_start_el', 'breadery_nav_menu_social_icons', 10, 4 );
+
+/**
+ * Search results yield only posts
+ */
+function breadery_search_filter($query) {
+    if ($query->is_search) {
+        $query->set('post_type', 'post');
+    }
+    return $query;
+}
+add_filter('pre_get_posts','breadery_search_filter');
 
 /*--------------------------------------------------------------
 # Custom Meta Boxes
