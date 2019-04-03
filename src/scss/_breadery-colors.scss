@@ -1,8 +1,7 @@
-$green: #294C17;
-$lgreen: #665F14;
-$gold: #996B0F;
-$lbrown: #663014;
-$brown: #4C1717;
+$color-primary: #294C17;
+$color-secondary: #996B0F;
+$color-tertiary: #4C1717;
+$body: #404040;
 
 @function tint($color, $percent) {
     @return mix(white, $color, $percent);
