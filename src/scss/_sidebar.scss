@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 .sidebar-toggler {
 	position: absolute;
-	background: rgba(0,0,0,0.15);
+	background: rgba(200, 200, 200, 0.75);
 
 	&:not(.collapsed)::before {
 		content: '\00d7';
