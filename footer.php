@@ -32,7 +32,6 @@
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
-<div id="site-overlay" class="collapse"></div>
 <?php wp_footer(); ?>
 
 </body>

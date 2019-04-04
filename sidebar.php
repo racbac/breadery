@@ -16,4 +16,5 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	<aside id="secondary" class="widget-area collapse sidebar-collapse">
 		<div><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 	</aside><!-- #secondary -->
+	<div class="site-overlay collapse"></div>
 </div>

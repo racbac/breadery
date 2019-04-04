@@ -2,11 +2,13 @@
 .sidebar-collapse {
 	align-self: stretch;
 	margin: 0;
+	z-index: 3;
 }
 
 .sidebar-toggler {
 	position: absolute;
 	margin: 1px;
+	z-index: 4;
 
 	&:not(.collapsed)::before {
 		content: '\00d7';
@@ -16,6 +18,17 @@
 		content: '\002b';
 	}
 }	
+
+.site-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+}
 
 .sidebar-expand {
 	@each $breakpoint in map-keys($grid-breakpoints) {
@@ -30,7 +43,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-end;
-			z-index: 3;
+			z-index: 2;
 
 			@include media-breakpoint-up($next) {
 				position: initial;
@@ -44,6 +57,8 @@
 				.sidebar-toggler {
 					display: none;
 				}
+
+				.site-overlay { display: none !important; }
 			}
 		}
 	}

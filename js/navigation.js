@@ -10,7 +10,7 @@
             $(this).attr('aria-expanded',function(index, attr) {
                 return attr === 'false' ? 'true' : 'false';
             });
-            $("#site-overlay").toggleClass("show");
+            $(".site-overlay").toggleClass("show");
         });
     });
 })(jQuery);
