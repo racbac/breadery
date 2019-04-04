@@ -81,6 +81,11 @@ if ( ! function_exists( 'breadery_setup' ) ) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
+
+		/**
+		 * WordPress maintains embeds' aspect ratios
+		 */
+		add_theme_support( 'responsive-embeds' );
 	}
 endif;
 add_action( 'after_setup_theme', 'breadery_setup' );
