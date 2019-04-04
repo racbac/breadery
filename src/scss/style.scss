@@ -20,18 +20,19 @@ Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
+// Dependencies: breadery-colors, bootstrap breakpoints, bootstrap form classes, bootstrap button classes
 
 $font-primary: 'Lobster', serif;
 $font-secondary: 'EB Garamond', 'Georgia', serif;
 $font-tertiary: 'Lato', serif;
-$logo-width: 250px;
+$logo-width: 200px;
 $reading-width: 40em;
 
 @import "src/scss/normalize-slim";
 @import "src/scss/breadery-colors";
-@import "src/scss/bootstrap-custom";
+@import "src/scss/bootstrap-custom"; // Dependencies: breadery-colors
 @import "node_modules/bootstrap/scss/bootstrap";
-@import "src/scss/sidebar";
+@import "src/scss/sidebar"; // Dependencies: bootstrap breakpoints
 @import "src/scss/social-colors";
 
 /*--------------------------------------------------------------
@@ -55,7 +56,7 @@ $reading-width: 40em;
 
 @include media-breakpoint-up(md) {
 	.site-branding {
-		margin-bottom: -25px;
+		margin-bottom: -20px;
 	}
 }
 
@@ -76,14 +77,11 @@ $reading-width: 40em;
 
 .site-info {
 	margin: 1em;
+	color: rgba(black, 0.75);
 }
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-.site-info {
-	color: $gray-900;
-}
-
 body {
 	font-family: $font-tertiary;
 }
@@ -163,7 +161,7 @@ a {
 	padding: 0.4rem;
 	a {
 		padding: 0;
-		color: #000000;
+		color: rgba(black, 0.75);
 		font-size: 1.4rem;
 	}
 }
@@ -250,8 +248,8 @@ article {
 	text-align: center;
 }
 
-.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content {
-	margin: 1.5rem 3rem;
+.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content, body.blog .post-thumbnail {
+	margin: 2rem 1rem;
 }
 
 .entry-meta > span {
@@ -259,7 +257,7 @@ article {
 
 	i { 
 		margin-right: 0.5em;
-		color: $color-tertiary;;
+		color: tint($color-secondary, 60);
 	 }
 
 	&:last-of-type {
@@ -269,11 +267,17 @@ article {
 
 .post-thumbnail {
 	position: relative;
-	text-align: center;
-	margin: auto;
-	display: table;
-	> * {
-		display: table-row;
+
+	img {
+		width: 100%;
+	}
+	.img-caption {
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
+
+		color: tint($color-secondary, 50%);
+		font-family: $font-primary;
 	}
 }
 
@@ -306,6 +310,10 @@ article {
 button, input[type="button"], input[type="reset"], input[type="submit"] {
 	@extend .btn;
 	@extend .btn-primary;
+}
+
+input, label { // Inputs with size attributes fit containers
+	max-width: 100%;
 }
 
 /*--------------------------------------------------------------
@@ -362,8 +370,8 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 }
 
 .search-form {
-	.input-group > .form-control.search-field {
-		flex: 0 1 10em;
+	.input-group {
+		flex-wrap: nowrap;
 	}
 }
 
@@ -389,6 +397,12 @@ select[name="archive-dropdown"] {
 		height: auto;
 		top: initial;
 		right: initial;
+	}
+}
+
+@include media-breakpoint-up(sm) {
+	.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content, body.blog .post-thumbnail {
+		margin: 2rem 3rem;
 	}
 }
 

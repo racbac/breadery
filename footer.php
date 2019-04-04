@@ -27,7 +27,7 @@
 			<small>
 			<?php
 			/* translators: 1: CMS, 2: Theme, 3: Theme author. */
-			printf( esc_html__( 'Using %1$s theme %2$s by %3$s.', 'breadery' ), '<a href="'.esc_url(__('https://wordpress.org/', 'breadery')).'">Wordpress</a>', 'breadery', '<a href="https://www.rachelbackert.com">Rachel Backert</a>' );
+			printf( esc_html__( 'Using %1$s theme %2$s by %3$s', 'breadery' ), '<a href="'.esc_url(__('https://wordpress.org/', 'breadery')).'">Wordpress</a>', 'breadery', '<a href="https://www.rachelbackert.com">Rachel Backert</a>' );
 			?></small>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

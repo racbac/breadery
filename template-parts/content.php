@@ -10,20 +10,26 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<?php 
+	if ( is_singular() ) : 
+	breadery_post_thumbnail();
+	?>
 	<header class="entry-header">
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
-
-		if ( 'post' === get_post_type() ) :
-		?>
-		<?php endif; ?>
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
+	
+	<?php else : ?>
+	<header class="entry-header">
+		<?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+	</header><!-- .entry-header -->
+	<?php 
+	breadery_post_thumbnail();
+	endif;
 
-	<?php breadery_post_thumbnail(); ?>
+	if ( 'post' === get_post_type() ) :
+	?>
+	<?php endif; ?>
 
 	<div class="entry-content">
 		<?php
