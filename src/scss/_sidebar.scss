@@ -7,6 +7,7 @@
 
 .sidebar-toggler {
 	position: absolute;
+	right: 0;
 	margin: 1px;
 	z-index: 4;
 
@@ -46,7 +47,7 @@
 			z-index: 2;
 
 			@include media-breakpoint-up($next) {
-				position: initial;
+				position: static;
 				height: auto;
 				top: initial;
 				right: initial;

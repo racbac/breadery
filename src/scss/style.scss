@@ -39,7 +39,7 @@ $reading-width: 40em;
 # Header
 --------------------------------------------------------------*/
 .site-header {
-	background: $color-primary;
+	background-color: $color-primary;
 }
 
 .site-branding {
@@ -50,7 +50,7 @@ $reading-width: 40em;
 }
 
 .custom-logo-link {
-	max-width: $logo-width;
+	width: $logo-width;
 	height: auto;
 }
 
@@ -143,7 +143,7 @@ a {
 	width: 0;
 
 	border-radius: 1rem;
-	background: transparent;
+	background-color: transparent;
 	transition: width .5s ease, background-color .3s ease;
 }
 
@@ -186,7 +186,7 @@ html, body {
 	flex: 1 0 auto;
 }
 
-.site-footer {
+.site-footer, .site-header {
 	flex-shrink: 0;
 }
 // end sticky footer
@@ -382,7 +382,7 @@ select[name="archive-dropdown"] {
 	}
 
 	.sidebar-expand-lg {
-		position: initial;
+		position: static;
 		height: auto;
 		top: initial;
 		right: initial;
