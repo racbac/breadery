@@ -197,9 +197,9 @@ body {
 
 .site-content {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
 }
 
 .content-area {
@@ -382,6 +382,7 @@ select[name="archive-dropdown"] {
 /*--------------------------------------------------------------
 # Breakpoints
 --------------------------------------------------------------*/
+// Push sidebar to bottom on extra-small screens instead of collapsing
 @include media-breakpoint-down(xs) {
 	.widget-area {
 		display: block !important;
@@ -400,12 +401,14 @@ select[name="archive-dropdown"] {
 	}
 }
 
+// Reduce spacing on small screens
 @include media-breakpoint-up(sm) {
 	.entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content, body.blog .post-thumbnail {
 		margin: 2rem 3rem;
 	}
 }
 
+// Put site logo in center of toolbar on medium screens
 @include media-breakpoint-up(md) {
 	.site-branding {
 		order: 0;
@@ -418,12 +421,7 @@ select[name="archive-dropdown"] {
 
 @include media-breakpoint-up(lg) {
 	.site-content {
-		flex-direction: row;
-		align-items: flex-start;
-	}
-
-	.sidebar {
-		align-self: flex-start;
+		flex-wrap: nowrap;
 	}
 
 	.widget-area {
