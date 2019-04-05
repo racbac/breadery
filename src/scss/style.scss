@@ -363,6 +363,10 @@ input, label { // Inputs with size attributes fit containers
 	}
 }
 
+.sidebar-toggler {
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
 select[name="archive-dropdown"] {
 	@extend .form-control;
 	width: auto;
