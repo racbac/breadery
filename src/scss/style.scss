@@ -105,8 +105,13 @@ body {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: $font-secondary;
+}
+
+h1, h2, .h1, .h2 {
 	font-weight: 700;
 }
+
+h4, h6, .h4, .h6 { font-style: italic; }
 
 a {
 	text-decoration: none;
@@ -221,7 +226,7 @@ body {
 
 .content-area {
 	background-color: white;
-	flex: 0 1 900px;
+	max-width: 1000px;
 }
 
 ul {
@@ -255,6 +260,12 @@ article {
 
 .entry-header, .entry-content, .entry-footer, .page-header, .entry-summary, .comments-area, .page-content, body.blog .post-thumbnail {
 	margin: 2rem 1rem;
+}
+
+.entry-content {
+	p, ol, li {
+		max-width: 50em;;
+	}
 }
 
 .entry-meta > span {
