@@ -14,7 +14,7 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer">
-		<nav class="footer-navigation navbar navbar-expand navbar-dark justify-content-center">
+		<nav class="footer-navigation navbar navbar-expand navbar-light justify-content-center">
 			<?php
 				wp_nav_menu( array(
 					'theme_location' => 'footer-menu',
@@ -23,6 +23,11 @@
 				) );
 			?>
 		</nav>
+		<?php if (is_active_sidebar( 'sidebar-2' ) ) : ?>
+		<aside class="footer-sidebar widget-area d-flex flex-wrap">
+			<?php dynamic_sidebar( 'sidebar-2' ); ?>
+		</aside><!-- .footer-sidebar -->
+		<?php endif; ?>
 		<div class="site-info">
 			<small>
 			<?php

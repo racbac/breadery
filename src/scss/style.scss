@@ -20,7 +20,8 @@ Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
-// Dependencies: breadery-colors, bootstrap breakpoints, bootstrap form classes, bootstrap button classes
+// File Dependencies: breadery-colors, bootstrap breakpoints, bootstrap form classes, bootstrap button classes
+// Site Dependencies: breadery-colors, bootstrap breakpoints, bootstrap form classes, bootstrap button classes, bootstrap navbar
 
 $font-primary: 'Lobster', serif;
 $font-secondary: 'EB Garamond', 'Georgia', serif;
@@ -82,19 +83,19 @@ $reading-width: 40em;
 --------------------------------------------------------------*/
 .site-footer {
 	background-color: $color-primary;
+	color: $navbar-light-color;
+
+	> * {
+		margin: 1rem;
+	}
+
+	.footer-sidebar {
+		margin: -1rem 0 -2rem;
+	}
 }
 
 #footer-menu {
 	font-family: $font-tertiary;
-}
-
-.footer-navigation {
-	margin: 2em auto;
-}
-
-.site-info {
-	margin: 1em;
-	color: rgba(black, 0.75);
 }
 /*--------------------------------------------------------------
 # Typography
@@ -181,9 +182,9 @@ a {
 
 #social-menu {
 	padding: 0.4rem;
+	flex-direction: row;
 	a {
 		padding: 0;
-		color: rgba(black, 0.75);
 		font-size: 1.4rem;
 	}
 }
@@ -226,7 +227,7 @@ body {
 
 .content-area {
 	background-color: white;
-	max-width: 1000px;
+	flex: 0 1 1000px;
 }
 
 ul {
@@ -372,17 +373,13 @@ input, label { // Inputs with size attributes fit containers
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-.widget-area {
-	display: block;
+#secondary {
 	background-color: white;
 	overflow-y: auto;
-	> div {
-		padding: 1rem;
-	}
 }
 
 .widget {
-	margin-bottom: 1rem;
+	margin: 1rem;
 }
 
 .search-form {
@@ -404,7 +401,7 @@ select[name="archive-dropdown"] {
 --------------------------------------------------------------*/
 // Push sidebar to bottom on extra-small screens instead of collapsing
 @include media-breakpoint-down(xs) {
-	.widget-area {
+	#secondary {
 		display: block !important;
 		margin: 1rem;
 	}
@@ -445,7 +442,7 @@ select[name="archive-dropdown"] {
 		flex-wrap: nowrap;
 	}
 
-	.widget-area {
+	#secondary {
 		margin: 1rem;
 	}
 }

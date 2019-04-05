@@ -24,7 +24,7 @@
 	<a class="skip-link sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'breadery' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="navbar navbar-expand-md navbar-dark justify-content-between">
+		<div class="navbar navbar-expand-md navbar-light justify-content-between">
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target=".main-navigation" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="navbar-toggler-icon"></span>
         	</button>
@@ -63,7 +63,7 @@
 					wp_nav_menu( array(
 						'theme_location' => 'social-menu',
 						'menu_id'        => 'social-menu',
-						'menu_class'     => 'nav justify-content-center',
+						'menu_class'     => 'navbar-nav justify-content-center',
 						'link_before'    => '<span class="sr-only">',
 						'link_after'     => '</span>'
 					));
