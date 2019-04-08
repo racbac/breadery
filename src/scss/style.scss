@@ -29,11 +29,14 @@ $font-tertiary: 'Lato', serif;
 $logo-width: 200px;
 $reading-width: 40em;
 
-@import "src/scss/normalize-slim";
 @import "src/scss/breadery-colors";
-@import "src/scss/bootstrap-custom"; // Dependencies: breadery-colors
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "src/scss/sidebar"; // Dependencies: bootstrap breakpoints
+$primary: $color-primary;
+$secondary: $color-secondary;
+
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
 @import "src/scss/social-colors";
 
 /*--------------------------------------------------------------
@@ -324,11 +327,6 @@ article {
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
-button, input[type="button"], input[type="reset"], input[type="submit"] {
-	@extend .btn;
-	@extend .btn-primary;
-}
-
 input, label { // Inputs with size attributes fit containers
 	max-width: 100%;
 }
@@ -393,7 +391,6 @@ input, label { // Inputs with size attributes fit containers
 }
 
 select[name="archive-dropdown"] {
-	@extend .form-control;
 	width: auto;
 }
 /*--------------------------------------------------------------
