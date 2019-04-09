@@ -17,6 +17,16 @@ if ( ! function_exists('breadery_post_navigation')) :
 	}
 endif;
 
+function breadery_menu_fallback($args) {
+	return wp_page_menu(array(
+		'container'  => 'ul',
+		'before'     => '',
+		'after'      => '',
+		'menu_class' => $args['menu_class'],
+		'menu_id'    => $args['theme_location']
+	));
+}
+
 if ( ! function_exists( 'breadery_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.

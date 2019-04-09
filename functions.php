@@ -207,11 +207,19 @@ function breadery_menu_link_class($atts) {
 	return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'breadery_menu_link_class');
+
 function breadery_menu_list_item_class ($classes) {
 	array_push($classes, 'nav-item');
 	return $classes;
 }
 add_filter('nav_menu_css_class', 'breadery_menu_list_item_class');
+
+function breadery_page_menu_classes($menu) {
+	$menu = str_replace('li class="','li class="nav-item ', $menu);
+	$menu = str_replace('a href','a class="nav-link" href', $menu);
+	return $menu;
+}
+add_filter('wp_page_menu', 'breadery_page_menu_classes');
 
   /**
  * Use Font Awesome webfont for social links

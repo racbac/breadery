@@ -33,7 +33,8 @@
 				wp_nav_menu( array(
 					'theme_location' => 'primary-menu',
 					'menu_id'        => 'primary-menu',
-					'menu_class'     => 'navbar-nav nav-menu align-items-center'
+					'menu_class'     => 'navbar-nav nav-menu align-items-center',
+					'fallback_cb'    => 'breadery_menu_fallback'
 				) );
 				?>
 			</nav>
@@ -60,13 +61,16 @@
 			</div><!-- .site-branding -->
 			<nav id="social-navigation" class="main-navigation navbar-collapse collapse justify-content-end">
 				<?php 
+					// if (has_nav_menu('social-menu')) :
 					wp_nav_menu( array(
 						'theme_location' => 'social-menu',
 						'menu_id'        => 'social-menu',
 						'menu_class'     => 'navbar-nav justify-content-center',
 						'link_before'    => '<span class="sr-only">',
-						'link_after'     => '</span>'
+						'link_after'     => '</span>',
+						'fallback_cb'    => false
 					));
+					// endif;
 				?>
 			</nav>
 		</div><!-- .navbar -->

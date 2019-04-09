@@ -428,10 +428,12 @@ select[name="archive-dropdown"] {
 
 // Put site logo in center of toolbar on medium screens
 @include media-breakpoint-up(md) {
-	.site-branding {
+	.site-branding:first-child:nth-last-child(4) {
 		order: 0;
 	}
-	#site-navigation, #social-navigation { flex: 1; }	
+	#site-navigation, #social-navigation { 
+		&:first-child:nth-last-child(4) { flex: 1; }
+	}
 }
 
 @include media-breakpoint-up(lg) {
