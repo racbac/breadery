@@ -575,8 +575,6 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
           order: -1;
   -ms-flex-item-align: stretch;
       align-self: stretch;
-  -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.9));
-          filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.9));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
@@ -586,6 +584,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
       align-self: center; }
 
 .custom-logo-link {
+  -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.9));
+          filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.9));
   width: 200px;
   height: auto;
   -ms-flex-item-align: end;
@@ -733,13 +733,15 @@ html, body {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto; }
+  .site-content:before {
+    content: none; }
 
 .site-footer, .site-header {
   -ms-flex-negative: 0;
       flex-shrink: 0; }
 
 body {
-  background-color: #a87848; }
+  background-color: #9E7945; }
 
 .site-content {
   display: -webkit-box;

@@ -50,13 +50,13 @@ $secondary: $color-secondary;
 	z-index: 1;
 	order: -1; // logo is on the left by default, center on large screens
 	align-self: stretch;
-	filter: drop-shadow(0 5px 5px rgba(0,0,0,0.9));
 	display: flex;
 }
 
 .site-meta { align-self: center; }
 
 .custom-logo-link {
+	filter: drop-shadow(0 5px 5px rgba(0,0,0,0.9));
 	width: $logo-width;
 	height: auto;
 	align-self: flex-end;
@@ -210,6 +210,9 @@ html, body {
 
 .site-content {
 	flex: 1 0 auto;
+	&:before {
+		content: none;
+	}
 }
 
 .site-footer, .site-header {
@@ -218,7 +221,7 @@ html, body {
 // end sticky footer
 
 body {
-	background-color: #a87848;
+	background-color: #9E7945;
 }
 
 .site-content {
@@ -428,12 +431,10 @@ select[name="archive-dropdown"] {
 
 // Put site logo in center of toolbar on medium screens
 @include media-breakpoint-up(md) {
-	.site-branding:first-child:nth-last-child(4) {
+	.site-branding  {
 		order: 0;
 	}
-	#site-navigation, #social-navigation { 
-		&:first-child:nth-last-child(4) { flex: 1; }
-	}
+	#site-navigation, #social-navigation {  flex: 1; }
 }
 
 @include media-breakpoint-up(lg) {
