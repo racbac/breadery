@@ -30,13 +30,10 @@ $logo-width: 200px;
 $reading-width: 40em;
 
 @import "src/scss/breadery-colors";
-$primary: $color-primary;
-$secondary: $color-secondary;
-
+@import "src/scss/bootstrap-custom"; // Dependencies: breadery-colors
 @import 'node_modules/bootstrap/scss/functions';
 @import 'node_modules/bootstrap/scss/variables';
 @import 'node_modules/bootstrap/scss/mixins';
-
 @import "src/scss/social-colors";
 
 /*--------------------------------------------------------------
